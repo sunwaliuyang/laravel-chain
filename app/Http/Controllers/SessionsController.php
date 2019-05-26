@@ -17,7 +17,7 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
         #账号密码验证
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->has('remember'))) {
             session()->flash('success', '欢迎回来！');
             return redirect()->route('user.show', [Auth::user()]);
         } else {
